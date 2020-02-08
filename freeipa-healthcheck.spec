@@ -69,6 +69,6 @@ identification, diagnosis and potentially repair of problems.
 #%%python3_sitelibdir_noarch/%oname
 
 %changelog
-* Fri Feb 07 2020 Ivan Alekseev <qwetwe@altlinux.org> 0.5-alt0
+* Fri Feb 07 2020 Ivan Alekseev <qwetwe@altlinux.org> 0.5-alt1
 - Initial build
 
