@@ -1,4 +1,4 @@
-%define oname freeipa-healthcheck
+%define oname 0.5
 
 Name: %oname
 Version: 0.5
