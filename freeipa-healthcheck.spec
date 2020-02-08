@@ -1,4 +1,5 @@
-%define oname 0.5
+%define oname freeipa-healthcheck
+%define version 0.5
 
 Name: %oname
 Version: 0.5
@@ -9,7 +10,7 @@ License: GPLv3
 Group: System/Base
 Url: https://github.com/freeipa/freeipa-healthcheck
 
-Source0: %version.tar.gz
+Source: %version.tar.gz
 
 #Requires: freeipa-server
 Requires: freeipa-server
