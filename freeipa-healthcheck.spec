@@ -10,7 +10,7 @@ License: GPLv3
 Group: System/Base
 Url: https://github.com/freeipa/freeipa-healthcheck
 
-Source: %name-%version.tar.gz
+Source: %version.tar.gz
 
 #Requires: freeipa-server
 Requires: freeipa-server
