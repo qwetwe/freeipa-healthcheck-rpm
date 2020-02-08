@@ -3,7 +3,7 @@
 
 Name: %oname
 Version: 0.5
-Release: alt0
+Release: alt1
 
 Summary: Check the health of a FreeIPA installation
 License: GPLv3
