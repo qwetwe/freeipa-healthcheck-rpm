@@ -1,4 +1,5 @@
 %define oname freeipa-healthcheck
+%define docname ipahealthcheck
 %define version 0.5
 
 Name: %oname
@@ -10,7 +11,7 @@ License: GPLv3
 Group: System/Base
 Url: https://github.com/freeipa/freeipa-healthcheck
 
-Source0: %name.tar.gz
+Source0: %name-%version.tar.gz
 
 #Requires: freeipa-server
 Requires: freeipa-server
@@ -67,7 +68,7 @@ identification, diagnosis and potentially repair of problems.
 %files
 %doc COPYING README.md
 #%%python3_sitelibdir_noarch/%oname
-%python3_sitelibdir_noarch/%oname
+%python3_sitelibdir_noarch/%docname
 
 %changelog
 * Fri Feb 07 2020 Ivan Alekseev <qwetwe@altlinux.org> 0.5-alt1
