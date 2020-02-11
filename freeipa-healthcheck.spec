@@ -1,7 +1,6 @@
-#%%define oname freeipa-healthcheck
 %define oname python3-module-freeipa-healthcheck
 %define docname ipahealthcheck
-%define version 0.5
+%def_with check
 
 Name: %oname
 Version: 0.5
@@ -14,43 +13,24 @@ Url: https://github.com/freeipa/freeipa-healthcheck
 
 Source0: %name-%version.tar.gz
 
-#Requires: freeipa-server
 Requires: freeipa-server
-
-#Requires: python3-ipalib
 Requires: python3-module-freeipa
-
-#Requires:       python3-ipaserver
 Requires: python3-module-ipaserver
-
-#Requires:       anacron
 Requires: anacron
-
-#Requires:       logrotate
 Requires: logrotate
 
-#Requires(post): systemd-units
-#Requires:       %{name}-core = %{version}-%{release}
-#Requires(post): systemd-units
-#Requires: 
-
-
-#BuildRequires:  python3-devel
 BuildRequires: python3-dev
-#BuildRequires:  systemd-devel
 BuildRequires: libsystemd-devel
-
-#BuildRequires:  python3-pytest-runner
 BuildRequires: python3-module-pytest-runner
-#BuildRequires:  python3-ipalib
 BuildRequires: python3-module-freeipa
-#BuildRequires:  python3-ipaserver
 BuildRequires: python3-module-ipaserver
-#BuildRequires:  python3-lib389
 BuildRequires: python3-module-lib389
-#BuildRequires:  python3-libsss_nss_idmap
 BuildRequires: python3-module-sss_nss_idmap
 
+%if_with check
+BuildRequires: python3(tox)
+BuildRequires: python3(virtualenv)
+%endif
 
 %description
 FreeIPA-healthcheck is a framework which is needed to assist with the
@@ -66,9 +46,20 @@ identification, diagnosis and potentially repair of problems.
 %install
 %python3_install
 
+%check
+sed -i '/\[testenv\]/a whitelist_externals =\
+   \/bin\/cp\
+   \/bin\/sed\
+commands_pre =\
+   \/bin\/cp %_bindir\/py.test3 \{envbindir\}\/pytest\
+   \/bin\/sed -i \x271c #!\{envpython\}\x27 \{envbindir\}\/pytest' tox.ini
+export PIP_NO_INDEX=YES
+export TOX_TESTENV_PASSENV='PIP_NO_INDEX'
+export TOXENV=py%{python_version_nodots python3}
+tox.py3 --sitepackages -v
+
 %files
 %doc COPYING README.md
-#%%python3_sitelibdir_noarch/%oname
 %python3_sitelibdir_noarch/%docname
 
 %changelog
