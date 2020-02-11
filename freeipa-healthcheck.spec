@@ -60,10 +60,11 @@ tox.py3 --sitepackages -v
 
 %files
 %doc COPYING README.md
-#%%python3_sitelibdir_noarch/%docname
+%python3_sitelibdir_noarch/%docname
 %_bindir/ipa-healthcheck
-%python3_sitelibdir/%docname
-%python3_sitelibdir/ipahealthcheck-%version-py%_python3_version.egg-info/
+#%%python3_sitelibdir/%docname
+#%%python3_sitelibdir/ipahealthcheck-%version-py%_python3_version.egg-info/
+%python3_sitelibdir_noarch/ipahealthcheck-%version-py%_python3_version.egg-info/
 
 %changelog
 * Fri Feb 07 2020 Ivan Alekseev <qwetwe@altlinux.org> 0.5-alt1

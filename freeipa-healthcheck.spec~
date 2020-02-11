@@ -61,6 +61,7 @@ tox.py3 --sitepackages -v
 %files
 %doc COPYING README.md
 #%%python3_sitelibdir_noarch/%docname
+%_bindir/ipa-healthcheck
 %python3_sitelibdir/%docname
 %python3_sitelibdir/ipahealthcheck-%version-py%_python3_version.egg-info/
 
