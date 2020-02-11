@@ -68,7 +68,7 @@ identification, diagnosis and potentially repair of problems.
 %files
 %doc COPYING README.md
 #%%python3_sitelibdir_noarch/%oname
-%python3_sitelibdir_noarch/%oname
+%python3_sitelibdir_noarch/%docname
 
 %changelog
 * Fri Feb 07 2020 Ivan Alekseev <qwetwe@altlinux.org> 0.5-alt1
