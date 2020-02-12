@@ -13,6 +13,8 @@ Url: https://github.com/freeipa/freeipa-healthcheck
 
 Source0: %name-%version.tar.gz
 
+BuildArch: noarch
+
 Requires: freeipa-server
 Requires: python3-module-freeipa
 Requires: python3-module-ipaserver
@@ -64,6 +66,7 @@ tox.py3 --sitepackages -v
 %_bindir/ipa-healthcheck
 %python3_sitelibdir/%docname
 %python3_sitelibdir/ipahealthcheck-%version-py%_python3_version.egg-info/
+#%%python3_sitelibdir_noarch/ipahealthcheck-%version-py%_python3_version.egg-info/
 
 %changelog
 * Fri Feb 07 2020 Ivan Alekseev <qwetwe@altlinux.org> 0.5-alt1
