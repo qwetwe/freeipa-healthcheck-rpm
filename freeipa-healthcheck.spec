@@ -47,6 +47,13 @@ identification, diagnosis and potentially repair of problems.
 
 %install
 %python3_install
+#%%__mkdir_p %buildroot/etc/ipahealthcheck
+#%%__cat << EOF > %buildroot/etc/ipahealthcheck/ipahealthcheck.conf
+%__mkdir_p %buildroot/etc/ipahealthcheck
+%__cat << EOF > %buildroot/etc/ipahealthcheck/ipahealthcheck.conf
+[default]
+EOF
+%post_service
 
 %check
 sed -i '/\[testenv\]/a whitelist_externals =\
@@ -63,10 +70,12 @@ tox.py3 --sitepackages -v
 %files
 %doc COPYING README.md
 #%%python3_sitelibdir_noarch/%docname
+#%%python3_sitelibdir_noarch/ipahealthcheck-%version-py%_python3_version.egg-info/
 %_bindir/ipa-healthcheck
 %python3_sitelibdir/%docname
 %python3_sitelibdir/ipahealthcheck-%version-py%_python3_version.egg-info/
-#%%python3_sitelibdir_noarch/ipahealthcheck-%version-py%_python3_version.egg-info/
+%_sysconfdir/ipahealthcheck/
+%_sysconfdir/ipahealthcheck/ipahealthcheck.conf
 
 %changelog
 * Fri Feb 07 2020 Ivan Alekseev <qwetwe@altlinux.org> 0.5-alt1
