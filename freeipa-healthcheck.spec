@@ -56,17 +56,41 @@ identification, diagnosis and potentially repair of problems.
 %__cat << EOF > %buildroot/etc/ipahealthcheck/ipahealthcheck.conf
 [default]
 EOF
-%__cp -aRf systemd/ipa-healthcheck.service %buildroot%_unitdir/ipa-healthcheck.service
 
-#%%mkdir -p %buildroot%_unitdir/ipa-healthcheck.target.wants
-#%%install -m644 #%%SOURCE4 %buildroot%_unitdir/ipa-healthcheck.service
-#%%ln -s ../ipa-healthcheck.service %buildroot%_unitdir/
+%__mkdir_p %buildroot/usr/libexec/ipa
+%__cat << EOF > %buildroot/usr/libexec/ipa/ipa-healthcheck.sh
+#!/bin/sh
 
-#%%install -m644 #%%SOURCE17 %buildroot%_unitdir/altlinux-save-dmesg.service
-#ln -s ../altlinux-save-dmesg.service %buildroot%_unitdir/basic.target.wants
+LOGDIR=/var/log/ipa/healthcheck
 
+/usr/bin/ipa-healthcheck --output-file $LOGDIR/healthcheck.log
+EOF
 
-#%%post_service %_unitdir/ipa-healthcheck.service
+%__cat << EOF > %buildroot%_unitdir/ipa-healthcheck.service
+[Unit]
+Description=Execute IPA Healthcheck
+
+[Service]
+Type=simple
+ExecStart=/usr/libexec/ipa/ipa-healthcheck.sh
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+%__cat << EOF > %buildroot%_unitdir/ipa-healthcheck.timer
+[Unit]
+Description=Execute IPA Healthcheck every day at 4AM
+
+[Timer]
+OnCalendar=*-*-* 04:00:00
+Unit=ipa-healthcheck.service
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+#%%post_service ipa-healthcheck.service
 
 %check
 sed -i '/\[testenv\]/a whitelist_externals =\
