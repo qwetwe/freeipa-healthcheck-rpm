@@ -53,7 +53,7 @@ identification, diagnosis and potentially repair of problems.
 %__cat << EOF > %buildroot/etc/ipahealthcheck/ipahealthcheck.conf
 [default]
 EOF
-%post_service
+%post_service ipa-healthcheck.service
 
 %check
 sed -i '/\[testenv\]/a whitelist_externals =\

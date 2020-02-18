@@ -1,3 +1,4 @@
+%define name freeipa-healthcheck
 %define oname python3-module-freeipa-healthcheck
 %define docname ipahealthcheck
 %def_with check
@@ -53,7 +54,7 @@ identification, diagnosis and potentially repair of problems.
 %__cat << EOF > %buildroot/etc/ipahealthcheck/ipahealthcheck.conf
 [default]
 EOF
-%post_service
+%post_service ipa-healthcheck.service
 
 %check
 sed -i '/\[testenv\]/a whitelist_externals =\
