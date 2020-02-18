@@ -109,7 +109,7 @@ tox.py3 --sitepackages -v
 %_sysconfdir/ipahealthcheck/ipahealthcheck.conf
 %_unitdir/
 #python3_sitelibdir_noarch
-#%%_target_libdir_noarch/python3/site-packages/
+%_target_libdir_noarch/python3/site-packages/
 %_unitdir/ipa-healthcheck.service
 %_unitdir/ipa-healthcheck.timer
 
