@@ -63,7 +63,7 @@ LOGDIR=/var/log/ipa/healthcheck
 /usr/bin/ipa-healthcheck --output-file $LOGDIR/healthcheck.log
 EOF
 
-%__cat << EOF > %buildroot%_unitdir/ipa-healthcheck.service
+%__cat << EOF > %buildroot/system/ipa-healthcheck.service
 [Unit]
 Description=Execute IPA Healthcheck
 
@@ -110,6 +110,13 @@ tox.py3 --sitepackages -v
 %python3_sitelibdir/ipahealthcheck-%version-py%_python3_version.egg-info/
 %_sysconfdir/ipahealthcheck/
 %_sysconfdir/ipahealthcheck/ipahealthcheck.conf
+%_target_libdir_noarch/python3/site-packages/
+
+#_libexecdir=/usr/lib
+#%%_libexecdir/
+
+#_prefix=/usr
+%_prefix/libexec/ipa/ipa-healthcheck.sh
 
 %changelog
 * Fri Feb 07 2020 Ivan Alekseev <qwetwe@altlinux.org> 0.5-alt1
