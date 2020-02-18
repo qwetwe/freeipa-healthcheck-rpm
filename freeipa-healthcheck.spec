@@ -53,16 +53,14 @@ identification, diagnosis and potentially repair of problems.
 %__cat << EOF > %buildroot/etc/ipahealthcheck/ipahealthcheck.conf
 [default]
 EOF
-
 %__mkdir_p %buildroot/usr/libexec/ipa
 %__cat << EOF > %buildroot/usr/libexec/ipa/ipa-healthcheck.sh
 #!/bin/sh
-
 LOGDIR=/var/log/ipa/healthcheck
-
+\n
 /usr/bin/ipa-healthcheck --output-file $LOGDIR/healthcheck.log
 EOF
-
+%__mkdir_p %buildroot%_unitdir
 %__cat << EOF > %buildroot%_unitdir/ipa-healthcheck.service
 [Unit]
 Description=Execute IPA Healthcheck
@@ -74,7 +72,6 @@ ExecStart=/usr/libexec/ipa/ipa-healthcheck.sh
 [Install]
 WantedBy=multi-user.target
 EOF
-
 %__cat << EOF > %buildroot%_unitdir/ipa-healthcheck.timer
 [Unit]
 Description=Execute IPA Healthcheck every day at 4AM
