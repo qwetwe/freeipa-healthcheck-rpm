@@ -12,8 +12,13 @@ Group: System/Base
 Url: https://github.com/freeipa/freeipa-healthcheck
 
 Source0: %name-%version.tar.gz
+Source1: ipa-healthcheck.sh
+Source2: ipa-healthcheck.service
+
 
 BuildArch: noarch
+
+#%%define
 
 Requires: freeipa-server
 Requires: python3-module-freeipa
@@ -47,13 +52,21 @@ identification, diagnosis and potentially repair of problems.
 
 %install
 %python3_install
-#%%__mkdir_p %buildroot/etc/ipahealthcheck
-#%%__cat << EOF > %buildroot/etc/ipahealthcheck/ipahealthcheck.conf
 %__mkdir_p %buildroot/etc/ipahealthcheck
 %__cat << EOF > %buildroot/etc/ipahealthcheck/ipahealthcheck.conf
 [default]
 EOF
-%post_service ipa-healthcheck.service
+%__cp -aRf systemd/ipa-healthcheck.service %buildroot%_unitdir/ipa-healthcheck.service
+
+#mkdir -p %buildroot%_unitdir/ipa-healthcheck.target.wants
+#install -m644 %SOURCE4 %buildroot%_unitdir/ipa-healthcheck.service
+#ln -s ../ipa-healthcheck.service %buildroot%_unitdir/
+
+#install -m644 %SOURCE17 %buildroot%_unitdir/altlinux-save-dmesg.service
+#ln -s ../altlinux-save-dmesg.service %buildroot%_unitdir/basic.target.wants
+
+
+#%%post_service %_unitdir/ipa-healthcheck.service
 
 %check
 sed -i '/\[testenv\]/a whitelist_externals =\

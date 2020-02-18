@@ -1,4 +1,3 @@
-%define name freeipa-healthcheck
 %define oname python3-module-freeipa-healthcheck
 %define docname ipahealthcheck
 %def_with check
