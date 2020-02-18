@@ -12,9 +12,6 @@ Group: System/Base
 Url: https://github.com/freeipa/freeipa-healthcheck
 
 Source0: %name-%version.tar.gz
-Source1: ipa-healthcheck.sh
-Source2: ipa-healthcheck.service
-
 
 BuildArch: noarch
 

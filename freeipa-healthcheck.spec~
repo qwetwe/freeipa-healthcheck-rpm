@@ -59,27 +59,33 @@ EOF
 
 %__mkdir_p %buildroot/usr/libexec/ipa
 %__cat << EOF > %buildroot/usr/libexec/ipa/ipa-healthcheck.sh
-#!/bin/sh\n
-LOGDIR=/var/log/ipa/healthcheck\n
+#!/bin/sh
+
+LOGDIR=/var/log/ipa/healthcheck
+
 /usr/bin/ipa-healthcheck --output-file $LOGDIR/healthcheck.log
 EOF
 
 %__cat << EOF > %buildroot%_unitdir/ipa-healthcheck.service
 [Unit]
-Description=Execute IPA Healthcheck\n
+Description=Execute IPA Healthcheck
+
 [Service]
 Type=simple
-ExecStart=/usr/libexec/ipa/ipa-healthcheck.sh\n
+ExecStart=/usr/libexec/ipa/ipa-healthcheck.sh
+
 [Install]
 WantedBy=multi-user.target
 EOF
 
 %__cat << EOF > %buildroot%_unitdir/ipa-healthcheck.timer
 [Unit]
-Description=Execute IPA Healthcheck every day at 4AM\n\n
+Description=Execute IPA Healthcheck every day at 4AM
+
 [Timer]
 OnCalendar=*-*-* 04:00:00
-Unit=ipa-healthcheck.service\n\n
+Unit=ipa-healthcheck.service
+
 [Install]
 WantedBy=multi-user.target
 EOF
