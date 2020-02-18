@@ -58,11 +58,11 @@ identification, diagnosis and potentially repair of problems.
 EOF
 %__cp -aRf systemd/ipa-healthcheck.service %buildroot%_unitdir/ipa-healthcheck.service
 
-#mkdir -p %buildroot%_unitdir/ipa-healthcheck.target.wants
-#%%install -m644 %SOURCE4 %buildroot%_unitdir/ipa-healthcheck.service
-#ln -s ../ipa-healthcheck.service %buildroot%_unitdir/
+#%%mkdir -p %buildroot%_unitdir/ipa-healthcheck.target.wants
+#%%install -m644 #%%SOURCE4 %buildroot%_unitdir/ipa-healthcheck.service
+#%%ln -s ../ipa-healthcheck.service %buildroot%_unitdir/
 
-#%%install -m644 %SOURCE17 %buildroot%_unitdir/altlinux-save-dmesg.service
+#%%install -m644 #%%SOURCE17 %buildroot%_unitdir/altlinux-save-dmesg.service
 #ln -s ../altlinux-save-dmesg.service %buildroot%_unitdir/basic.target.wants
 
 
