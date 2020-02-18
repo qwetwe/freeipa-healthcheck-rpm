@@ -63,7 +63,7 @@ LOGDIR=/var/log/ipa/healthcheck
 /usr/bin/ipa-healthcheck --output-file $LOGDIR/healthcheck.log
 EOF
 
-%__cat << EOF > %buildroot/system/ipa-healthcheck.service
+%__cat << EOF > %buildroot%_unitdir/ipa-healthcheck.service
 [Unit]
 Description=Execute IPA Healthcheck
 
